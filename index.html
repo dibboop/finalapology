@@ -6,84 +6,52 @@
     <title>I'm Sorry 💔</title>
     <style>
         body {
-            background: linear-gradient(to bottom right, #ffdde1, #ee9ca7); /* Cute pink gradient */
+            background-color: #ffc0cb; /* Soft pink background */
             text-align: center;
             font-family: 'Comic Sans MS', cursive, sans-serif;
-            overflow: hidden;
         }
-        h1 {
-            color: white;
-            font-size: 3em;
-            text-shadow: 2px 2px 5px #ff69b4;
+        .container {
+            margin-top: 100px;
         }
         .sad-img {
-            width: 200px;
-            animation: shake 1s infinite alternate;
+            width: 250px;
+            height: auto;
         }
-        @keyframes shake {
-            from { transform: translateX(-5px); }
-            to { transform: translateX(5px); }
+        h1 {
+            font-size: 40px;
+            color: #ff4d6d; /* Deep pink text */
+            text-shadow: 2px 2px 5px #ff99ac;
         }
         .next-btn {
-            font-size: 1.5em;
-            padding: 15px 30px;
-            border: none;
-            border-radius: 20px;
-            background: #ff69b4;
+            background-color: #ff4d6d;
             color: white;
+            padding: 15px 30px;
+            font-size: 20px;
+            border: none;
+            border-radius: 25px;
             cursor: pointer;
-            box-shadow: 0px 4px 10px rgba(255, 20, 147, 0.5);
-            transition: all 0.3s;
+            transition: transform 0.2s, background 0.3s;
         }
         .next-btn:hover {
-            background: #ff1493;
+            background-color: #ff1e4d;
             transform: scale(1.1);
-        }
-        .heart-container {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }
-        .heart {
-            position: absolute;
-            color: #ff1493;
-            font-size: 20px;
-            animation: float 4s linear infinite;
-        }
-        @keyframes float {
-            0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
         }
     </style>
 </head>
 <body>
-
-    <h1>💔 I'm Sooo Sorry... 💔</h1>
-    <img src="_ (3).jpeg" width="345" height="443" alt="Cute Image">
-
-    <br><br>
-    <button class="next-btn" onclick="nextPage()">Next 💖</button>
-
-    <div class="heart-container"></div>
+    <div class="container">
+        <img class="sad-img" src="https://raw.githubusercontent.com/dibboop/finalapology/refs/heads/main/_%20(3).jpeg" alt="Sad Character"> 
+        <h1>I'm Sorry 💔</h1>
+        <p>Please click 'Next' to see how much I love you! 🥺💕</p>
+        <button class="next-btn" onclick="nextPage()">Next →</button>
+    </div>
 
     <script>
         function nextPage() {
-            window.location.href = "apology.html"; // Redirect to apology page
+            window.location.href = "apology.html"; // Redirect to the next page
         }
-
-        // Generate floating hearts
-        function createHeart() {
-            const heart = document.createElement("div");
-            heart.classList.add("heart");
-            heart.innerHTML = "💖";
-            heart.style.left = Math.random() * window.innerWidth + "px";
-            heart.style.animationDuration = (Math.random() * 2 + 3) + "s";
-            document.querySelector(".heart-container").appendChild(heart);
-            setTimeout(() => { heart.remove(); }, 4000);
-        }
-        setInterval(createHeart, 300);
     </script>
-
 </body>
 </html>
+
+   
