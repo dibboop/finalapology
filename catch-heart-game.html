@@ -3,100 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>💖 Catch the Heart! 💖</title>
+    <title>Catch the Heart Game</title>
     <style>
         body {
-            background-color: pink;
             text-align: center;
-            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background-color: pink;
             overflow: hidden;
         }
-        h1 {
-            color: white;
-            font-size: 2.5em;
-        }
-        #gameArea {
-            width: 100%;
-            height: 80vh;
+        #game-container {
             position: relative;
+            width: 100%;
+            height: 500px;
+            border: 2px solid red;
             overflow: hidden;
-            border: 3px solid white;
         }
         .heart {
-            width: 40px;
             position: absolute;
-            top: -50px;
+            width: 50px;
+            height: 50px;
         }
         #basket {
-            width: 80px;
             position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
+            bottom: 10px;
+            width: 80px;
+            height: 80px;
         }
-        #scoreBoard {
-            font-size: 1.5em;
-            color: white;
-            margin-top: 10px;
+        #score {
+            font-size: 24px;
+            font-weight: bold;
+            color: red;
         }
     </style>
 </head>
 <body>
-
-    <h1>💖 Catch the Falling Hearts! 💖</h1>
-    <p id="scoreBoard">Score: 0 | Missed: 0</p>
+    <h1>Catch the Hearts 💖</h1>
+    <p>Move the basket left and right to catch the hearts!</p>
+    <p>Score: <span id="score">0</span></p>
     
-    <div id="gameArea">
-        <img src="https://raw.githubusercontent.com/dibboop/finalapology/refs/heads/main/Basket%20emoji%20_%20AI%20Emoji%20Generator.jpeg" id="basket" alt="Basket">
+    <div id="game-container">
+        <img id="basket" src="https://raw.githubusercontent.com/dibboop/finalapology/refs/heads/main/Basket%20emoji%20_%20AI%20Emoji%20Generator.jpeg" style="left: 50%;" />
     </div>
 
     <script>
+        let basket = document.getElementById("basket");
+        let gameContainer = document.getElementById("game-container");
+        let scoreElement = document.getElementById("score");
         let score = 0;
-        let missed = 0;
-        const gameArea = document.getElementById("gameArea");
-        const basket = document.getElementById("basket");
-        const scoreBoard = document.getElementById("scoreBoard");
+        let hearts = [];
 
         function createHeart() {
             let heart = document.createElement("img");
-            heart.src = "https://raw.githubusercontent.com/dibboop/finalapology/refs/heads/main/308fa259-1d6d-446b-93ad-e03b477656bc.jpeg";
+            heart.src = "https://raw.githubusercontent.com/dibboop/finalapology/refs/heads/main/308fa259-1d6d-446b-93ad-e03b477656bc.jpeg"; 
             heart.classList.add("heart");
-            heart.style.left = Math.random() * 90 + "%";
-            gameArea.appendChild(heart);
+            heart.style.left = Math.random() * (gameContainer.clientWidth - 50) + "px";
+            heart.style.top = "0px";
+            gameContainer.appendChild(heart);
+            hearts.push(heart);
+        }
 
-            let fallInterval = setInterval(() => {
-                heart.style.top = heart.offsetTop + 5 + "px";
-                if (heart.offsetTop > window.innerHeight - 80) {
-                    let heartLeft = heart.offsetLeft;
-                    let basketLeft = basket.offsetLeft;
-                    if (heartLeft > basketLeft && heartLeft < basketLeft + 80) {
-                        score++;
-                    } else {
-                        missed++;
-                    }
-                    heart.remove();
-                    updateScore();
-                    clearInterval(fallInterval);
+        function moveHearts() {
+            hearts.forEach((heart, index) => {
+                let heartTop = parseInt(heart.style.top);
+                heart.style.top = heartTop + 5 + "px";
+
+                let basketRect = basket.getBoundingClientRect();
+                let heartRect = heart.getBoundingClientRect();
+
+                if (
+                    heartRect.bottom >= basketRect.top &&
+                    heartRect.right >= basketRect.left &&
+                    heartRect.left <= basketRect.right
+                ) {
+                    gameContainer.removeChild(heart);
+                    hearts.splice(index, 1);
+                    score++;
+                    scoreElement.innerText = score;
                 }
-            }, 50);
+
+                if (heartTop > gameContainer.clientHeight) {
+                    gameContainer.removeChild(heart);
+                    hearts.splice(index, 1);
+                }
+            });
         }
 
-        function updateScore() {
-            scoreBoard.innerText = `Score: ${score} | Missed: ${missed}`;
-            if (missed >= 5) {
-                alert("🥺💔 Don't break my heart! Try again!");
-                score = 0;
-                missed = 0;
+        document.addEventListener("keydown", (event) => {
+            let left = parseInt(basket.style.left);
+            if (event.key === "ArrowLeft" && left > 0) {
+                basket.style.left = left - 20 + "px";
+            } else if (event.key === "ArrowRight" && left < gameContainer.clientWidth - 80) {
+                basket.style.left = left + 20 + "px";
             }
-        }
-
-        document.addEventListener("mousemove", (event) => {
-            let x = event.clientX;
-            basket.style.left = x - 40 + "px";
         });
 
-        setInterval(createHeart, 800);
+        setInterval(createHeart, 1000);
+        setInterval(moveHearts, 50);
     </script>
-
 </body>
 </html>
