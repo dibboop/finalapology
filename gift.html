@@ -3,209 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Special Gift! 🎁💖</title>
+    <title>Your Gift 🎁</title>
     <style>
         body {
-            background-color: pink;
+            background-color: #ffccdc; /* Soft pastel pink */
             text-align: center;
             font-family: 'Comic Sans MS', cursive, sans-serif;
-            padding: 20px;
+            overflow: hidden;
         }
+
+        .container {
+            margin-top: 50px;
+        }
+
         h1 {
-            color: white;
-            font-size: 2.5em;
-            margin-bottom: 10px;
+            font-size: 45px;
+            color: #ff4d6d;
+            text-shadow: 2px 2px 5px #ff99ac;
         }
-        p {
-            color: white;
-            font-size: 1.3em;
-            margin-bottom: 20px;
-        }
+
+        /* Gift Box */
         .gift-box {
             width: 200px;
+            height: 200px;
+            background: url('https://raw.githubusercontent.com/dibboop/finalapology/refs/heads/main/_%20(4).jpeg') no-repeat center/cover; /* Pink Gift Box */
+            display: inline-block;
+            margin-top: 20px;
             cursor: pointer;
-            transition: transform 0.3s ease-in-out;
+            transition: transform 0.2s;
         }
+
+        /* Shake Effect */
         .shake {
-            animation: shake 0.6s ease-in-out;
+            animation: shake 0.5s ease-in-out infinite alternate;
         }
+
         @keyframes shake {
             0% { transform: rotate(0deg); }
-            20% { transform: rotate(-5deg); }
-            40% { transform: rotate(5deg); }
-            60% { transform: rotate(-5deg); }
-            80% { transform: rotate(5deg); }
-            100% { transform: rotate(0deg); }
+            25% { transform: rotate(3deg); }
+            50% { transform: rotate(-3deg); }
+            75% { transform: rotate(3deg); }
+            100% { transform: rotate(-3deg); }
         }
+
+        /* Buttons */
         .hidden {
             display: none;
         }
+
         .btn {
-            display: inline-block;
-            padding: 15px 25px;
-            font-size: 1.2em;
-            margin: 10px;
-            background-color: white;
-            color: pink;
-            border-radius: 10px;
-            text-decoration: none;
-            font-weight: bold;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-            transition: 0.3s;
-        }
-        .btn:hover {
-            background-color: lightpink;
+            background-color: #ff4d6d;
             color: white;
+            padding: 12px 25px;
+            font-size: 18px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            margin: 10px;
+            transition: transform 0.2s, background 0.3s;
         }
+
+        .btn:hover {
+            background-color: #ff1e4d;
+            transform: scale(1.1);
+        }
+
+        /* Cute Cat */
         .cat {
             width: 150px;
-            position: absolute;
-            bottom: -50px;
-            left: -150px;
-            animation: walkIn 3s ease-in-out 1s forwards;
-        }
-        @keyframes walkIn {
-            0% { left: -150px; }
-            100% { left: 50%; transform: translateX(-50%); }
+            margin-top: 20px;
+            display: none;
         }
     </style>
 </head>
 <body>
 
-    <h1>🎁 A Special Surprise for You! 💖</h1>
-    <p>Click on the gift to open it!</p>
-
-    <img src="https://raw.githubusercontent.com/dibboop/finalapology/refs/heads/main/_%20(4).jpeg" alt="Gift Box" class="gift-box" id="giftBox">
-
-    <div id="surpriseContent" class="hidden">
-        <p>💖 I made these just for you! 💖</p>
+    <div class="container">
+        <h1>🎀 Open Your Surprise 🎁</h1>
+        <div class="gift-box" id="giftBox" onclick="openGift()"></div>
         
-        <!-- Buttons for Playlist, Video, and Catch the Heart Game -->
-        <a href="your-playlist-link" class="btn">🎶 Open Your Playlist</a>
-        <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Special Gift! 🎁💖</title>
-    <style>
-        body {
-            background-color: pink;
-            text-align: center;
-            font-family: 'Comic Sans MS', cursive, sans-serif;
-            padding: 20px;
-        }
-        h1 {
-            color: white;
-            font-size: 2.5em;
-            margin-bottom: 10px;
-        }
-        p {
-            color: white;
-            font-size: 1.3em;
-            margin-bottom: 20px;
-        }
-        .gift-box {
-            width: 200px;
-            cursor: pointer;
-            transition: transform 0.3s ease-in-out;
-        }
-        .shake {
-            animation: shake 0.6s ease-in-out;
-        }
-        @keyframes shake {
-            0% { transform: rotate(0deg); }
-            20% { transform: rotate(-5deg); }
-            40% { transform: rotate(5deg); }
-            60% { transform: rotate(-5deg); }
-            80% { transform: rotate(5deg); }
-            100% { transform: rotate(0deg); }
-        }
-        .hidden {
-            display: none;
-        }
-        .btn {
-            display: inline-block;
-            padding: 15px 25px;
-            font-size: 1.2em;
-            margin: 10px;
-            background-color: white;
-            color: pink;
-            border-radius: 10px;
-            text-decoration: none;
-            font-weight: bold;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-            transition: 0.3s;
-        }
-        .btn:hover {
-            background-color: lightpink;
-            color: white;
-        }
-        .cat {
-            width: 150px;
-            position: absolute;
-            bottom: -50px;
-            left: -150px;
-            animation: walkIn 3s ease-in-out 1s forwards;
-        }
-        @keyframes walkIn {
-            0% { left: -150px; }
-            100% { left: 50%; transform: translateX(-50%); }
-        }
-    </style>
-</head>
-<body>
+        <!-- Buttons appear after clicking -->
+        <div id="buttons" class="hidden">
+            <button class="btn" onclick="window.location.href='playlist.html'">🎶 Playlist</button>
+            <button class="btn" onclick="window.location.href='video.html'">🎥 Video</button>
+            <button class="btn" onclick="window.location.href='game.html'">💖 Catch the Heart</button>
+        </div>
 
-    <h1>🎁 A Special Surprise for You! 💖</h1>
-    <p>Click on the gift to open it!</p>
-
-    <img src="https://i.imgur.com/UqgPBAa.png" alt="Gift Box" class="gift-box" id="giftBox">
-
-    <div id="surpriseContent" class="hidden">
-        <p>💖 I made these just for you! 💖</p>
-        
-        <!-- Buttons for Playlist, Video, and Catch the Heart Game -->
-        <a href="playlist.html" class="btn">🎶 Open Your Playlist</a>
-        
-        <a href="catch-heart-game.html" class="btn">🎮 Play "Catch the Heart"</a>
-
-        <!-- Cute cat walking in with the final button -->
-        <img src="https://i.imgur.com/Ubqeq0r.gif" class="cat" id="cuteCat">
+        <!-- Cute Cat with Final Question -->
+        <img src="https://raw.githubusercontent.com/dibboop/finalapology/refs/heads/main/0d9616f3-5e96-4a76-aac1-19cfa6e11b67.jpeg" class="cat" id="catImage">
         <br>
-        <a href="forgiveness-game.html" class="btn">🐱 The Final Question... 💖</a>
+        <button class="btn hidden" id="finalQuestion" onclick="window.location.href='final_question.html'">🐱 The Final Question</button>
     </div>
 
     <script>
-        document.getElementById("giftBox").addEventListener("click", function() {
-            this.classList.add("shake");
+        function openGift() {
+            let gift = document.getElementById("giftBox");
+            gift.classList.add("shake");
 
             setTimeout(() => {
-                this.src = "https://i.imgur.com/q41d7YX.png"; // Opened gift image
-                document.getElementById("surpriseContent").classList.remove("hidden");
-            }, 800);
-        });
-    </script>
-
-</body>
-</html>
-
-        <a href="catch-heart-game.html" class="btn">🎮 Play "Catch the Heart"</a>
-
-        <!-- Cute cat walking in with the final button -->
-        <img src="https://i.imgur.com/Ubqeq0r.gif" class="cat" id="cuteCat">
-        <br>
-        <a href="forgiveness.html" class="btn">🐱 The Final Question... 💖</a>
-    </div>
-
-    <script>
-        document.getElementById("giftBox").addEventListener("click", function() {
-            this.classList.add("shake");
-
-            setTimeout(() => {
-                this.src = "https://i.imgur.com/q41d7YX.png"; // Opened gift image
-                document.getElementById("surpriseContent").classList.remove("hidden");
-            }, 800);
-        });
+                gift.classList.remove("shake");
+                document.getElementById("buttons").classList.remove("hidden"); // Show buttons
+                document.getElementById("catImage").style.display = "block"; // Show cat
+                document.getElementById("finalQuestion").classList.remove("hidden"); // Show final question
+            }, 1500);
+        }
     </script>
 
 </body>
