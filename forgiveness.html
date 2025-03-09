@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>😿 Forgive Me? 😿</title>
+    <style>
+        body {
+            background-color: pink;
+            text-align: center;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            overflow: hidden;
+        }
+        h1 {
+            color: white;
+            font-size: 2.5em;
+        }
+        #cat {
+            width: 200px;
+        }
+        #btns {
+            margin-top: 20px;
+        }
+        button {
+            font-size: 1.5em;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            margin: 10px;
+            border-radius: 10px;
+        }
+        #yesBtn {
+            background-color: lightgreen;
+        }
+        #noBtn {
+            background-color: lightcoral;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>😿 Will You Forgive Me? 😿</h1>
+    <img id="cat" src="https://i.imgur.com/hN4W4G4.png" alt="Sad Cat">
+    
+    <div id="btns">
+        <button id="yesBtn" onclick="forgiven()">Yes 💖</button>
+        <button id="noBtn" onmouseover="runAway()">No 😠</button>
+    </div>
+
+    <script>
+        function runAway() {
+            let x = Math.random() * window.innerWidth;
+            let y = Math.random() * window.innerHeight;
+            document.getElementById("noBtn").style.left = x + "px";
+            document.getElementById("noBtn").style.top = y + "px";
+        }
+
+        function forgiven() {
+            document.body.innerHTML = `
+                <h1>🎉 YAY!! YOU FORGAVE ME!! 🎉</h1>
+                <img src="https://i.imgur.com/wOmoeGv.png" alt="Happy Cat" width="250">
+                <h2>💖 I LOVE YOU SOOO MUCH!! 💖</h2>
+            `;
+        }
+    </script>
+
+</body>
+</html>
