@@ -10,7 +10,7 @@
         body {
             text-align: center;
             background-color: #ffe6f2;
-            font-family: 'Pacifico', cursive;
+            font-family: 'Pacifico', cursive, sans-serif;
             overflow: hidden;
             position: relative;
         }
@@ -59,17 +59,21 @@
             border-radius: 15px;
             transition: 0.3s;
             box-shadow: 0 0 10px white;
-            font-family: 'Pacifico', cursive;
+            font-family: 'Pacifico', cursive, sans-serif;
         }
         button:hover {
             background-color: #ff1493;
             transform: scale(1.1);
             box-shadow: 0 0 20px white;
         }
-        .floating-hearts {
-            font-size: 24px;
+
+        /* Falling hearts */
+        .floating-heart {
             position: absolute;
-            animation: floatHearts 3s linear infinite;
+            font-size: 24px;
+            color: #ff1493;
+            opacity: 0.8;
+            animation: floatHearts 5s linear infinite;
         }
         @keyframes floatHearts {
             from { transform: translateY(0); opacity: 1; }
@@ -85,11 +89,11 @@
     <div id="options" class="hidden">
         <button onclick="window.location.href='playlist.html'">🎵 Open Playlist</button>
         <button onclick="window.location.href='video.html'">🎥 Watch Video</button>
-        <button onclick="window.location.href='catch-the-heart.html'">💖 Play Catch the Heart</button>
+        <button onclick="window.location.href='catch-heart-game.html'">💖 Play Catch the Heart</button>
     </div>
 
     <div id="final-button-container" class="hidden">
-        <button onclick="window.location.href='final-question.html'">✨ The Final Question ✨</button>
+        <button onclick="window.location.href='forgiveness.html'">✨ The Final Question ✨</button>
     </div>
 
     <script>
@@ -121,7 +125,7 @@
         function createFloatingHearts() {
             for (let i = 0; i < 15; i++) {
                 let heart = document.createElement("div");
-                heart.classList.add("floating-hearts");
+                heart.classList.add("floating-heart");
                 heart.innerHTML = "💖";
                 heart.style.left = Math.random() * 100 + "vw";
                 heart.style.animationDuration = Math.random() * 3 + 2 + "s";
@@ -134,4 +138,5 @@
 
 </body>
 </html>
+
 
