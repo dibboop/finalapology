@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Your Special Gift — Scrapbook</title>
+
+<style>
+  :root{
+    --bg1:#fff7fb;
+    --bg2:#fff0f6;
+    --paper:#fffefc;
+    --accent:#ff6b9f;
+    --soft:#fce7f2;
+    --card-w:280px;
+    --card-h:380px;
+    --radius:14px;
+  }
+  /* Page layout */
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family:Inter, "Helvetica Neue", Arial, sans-serif;
+    background: radial-gradient(circle at 10% 10%, #fffaff 0%, var(--bg1) 30%, var(--bg2) 100%);
+    color:#333;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:18px;
+    padding:28px;
+  }
+
+  header{
+    text-align:center;
+    margin-top:8px;
+  }
+  header h1{
+    margin:0;
+    font-size:clamp(20px,4vw,32px);
+    color:var(--accent);
+    letter-spacing:0.3px;
+  }
+  header p{margin:6px 0 0 0; color:#665; font-size:14px}
+
+  /* Book area */
+  .book {
+    perspective:1400px;
+    width:100%;
+    max-width:1100px;
+    display:flex;
+    gap:22px;
+    align-items:center;
+    justify-content:center;
+    flex-wrap:wrap;
+    padding:20px;
+  }
+
+  /* Each card (a scrapbook page) */
+  .card {
+    width:var(--card-w);
+    height:var(--card-h);
+    position:relative;
+    cursor:pointer;
+    user-select:none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .card .page {
+    width:100%;
+    height:100%;
+    transform-style:preserve-3d;
+    transition: transform 0.7s cubic-bezier(.2,.9,.2,1);
+    transform-origin: center right;
+    position:relative;
+  }
+
+  /* flip on hover for desktop, or when .flipped class is present (for click/tap) */
+  .card:hover .page,
+  .card.flipped .page {
+    transform: rotateY(-180deg);
+  }
+
+  .face{
+    position:absolute;
+    inset:0;
+    border-radius:var(--radius);
+    backface-visibility:hidden;
+    overflow:hidden;
+    box-shadow: 0 10px 30px rgba(50,20,50,0.08);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+  }
+
+  .front{
+    background: linear-gradient(180deg, var(--paper), #fff);
+    padding:14px;
+    gap:8px;
+  }
+
+  .front .art {
+    width:100%;
+    height:66%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background: repeating-linear-gradient(45deg, rgba(255,255,255,0.2) 0 6px, rgba(255,255,255,0.05) 6px 12px);
+    border-radius:10px;
+    margin-bottom:8px;
+  }
+  .front img{
+    max-width:100%;
+    max-height:100%;
+    object-fit:cover;
+    border-radius:8px;
+  }
+  .front .caption{
+    font-weight:600;
+    color:#7b3b57;
+    text-align:center;
+    padding:0 6px;
+  }
+
+  .back{
+    transform: rotateY(180deg);
+    background: linear-gradient(180deg,#fff6fb,var(--soft));
+    padding:18px;
+    gap:8px;
+    color:#5a2b3f;
+    text-align:center;
+  }
+  .back .message{
+    font-size:15px;
+    line-height:1.35;
+  }
+
+  .sticker{
+    position:absolute;
+    top:10px;
+    left:12px;
+    font-size:22px;
+    transform: rotate(-10deg);
+  }
+
+  /* Small hint text */
+  .hint{
+    margin-top:6px;
+    color:#755;
+    font-size:13px;
+  }
+
+  /* final big surprise area */
+  .surprise-wrap{
+    width:100%;
+    max-width:850px;
+    margin-top:6px;
+    text-align:center;
+    padding:18px;
+    border-radius:12px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.7), rgba(255,240,250,0.6));
+    box-shadow: 0 8px 24px rgba(80,10,40,0.06);
+    display:flex;
+    gap:12px;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+  }
+
+  .big-message{
+    font-size:clamp(18px, 2.4vw, 26px);
+    color:#8b2e50;
+    font-weight:700;
+  }
+  .big-sub{
+    color:#6d3b4f;
+    font-size:15px;
+  }
+
+  /* show/hide control (message only appears after flipping final card) */
+  .surprise-wrap.hidden{opacity:0; transform: translateY(8px); pointer-events:none}
+  .surprise-wrap.visible{opacity:1; transform: none; transition: all 0.6s ease-out}
+
+  /* responsive */
+  @media (max-width:720px){
+    .book{gap:14px}
+  }
+</style>
+</head>
+
+<body>
+  <header>
+    <h1>Your Special Gift</h1>
+    <p>Hover or tap each page to flip — there's a little secret at the end 💌</p>
+  </header>
+
+  <main class="book" id="book">
+    <!-- Page 1: use your Kittl image or keep the emoji art -->
+    <article class="card" data-page="1">
+      <div class="sticker">💫</div>
+      <div class="page">
+        <div class="face front">
+          <div class="art">
+            <!-- Replace the image below with your exported Kittl PNG/SVG -->
+            <!-- Example: images/page1.png -->
+            <img src="images/page1.png" alt="cute kittl art or photo (page 1)" onerror="this.style.display='none'">
+            <!-- If you don't upload any image, the emoji below will show: -->
+            <div style="font-size:70px; padding:10px;">🌸</div>
+          </div>
+          <div class="caption">Remember our first movie night?</div>
+        </div>
+
+        <div class="face back">
+          <div class="message">
+            The popcorn, the laughter — I still remember every detail. I’m sorry for that night; I love making memories with you.
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Page 2 -->
+    <article class="card" data-page="2">
+      <div class="sticker">📸</div>
+      <div class="page">
+        <div class="face front">
+          <div class="art">
+            <img src="images/page2.png" alt="kittl art or photo (page 2)" onerror="this.style.display='none'">
+            <div style="font-size:70px; padding:10px;">💖</div>
+          </div>
+          <div class="caption">Tiny adventures, big laughs</div>
+        </div>
+
+        <div class="face back">
+          <div class="message">
+            We don't need big plans — just you, me and our silly inside jokes. Thank you for staying.
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Page 3: a playful/interactive page -->
+    <article class="card" data-page="3">
+      <div class="sticker">🎈</div>
+      <div class="page">
+        <div class="face front">
+          <div class="art">
+            <img src="images/page3.png" alt="kittl art or photo (page 3)" onerror="this.style.display='none'">
+            <div style="font-size:70px; padding:10px;">✨</div>
+          </div>
+          <div class="caption">A silly promise</div>
+        </div>
+
+        <div class="face back">
+          <div class="message">
+            I promise to try harder, listen more, and bring more cupcakes. Please forgive my silly mistakes.
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Final Page (this one triggers the big message) -->
+    <article class="card" data-page="final" id="final-card">
+      <div class="sticker">❤️</div>
+      <div class="page">
+        <div class="face front">
+          <div class="art">
+            <img src="images/page-final.png" alt="kittl art final" onerror="this.style.display='none'">
+            <div style="font-size:64px; padding:10px;">📝</div>
+          </div>
+          <div class="caption">One last thing...</div>
+        </div>
+
+        <div class="face back">
+          <div class="message">
+            Flip me — I have something important to say.
+          </div>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <!-- Surprise message appears after final flip -->
+  <section id="surprise" class="surprise-wrap hidden" aria-live="polite">
+    <div id="bigmsg" class="big-message"></div>
+    <div class="big-sub">Click any page again to flip back — change text in the HTML whenever you like.</div>
+  </section>
+
+<script>
+/* ===== Click-to-flip for mobile + hover support for desktop =====
+   - Each .card flips on hover (desktop) and toggles flip on click/tap (mobile).
+   - The final card (data-page="final") will reveal the big message when flipped.
+*/
+
+document.addEventListener('DOMContentLoaded', function() {
+  const cards = Array.from(document.querySelectorAll('.card'));
+  const finalCard = document.querySelector('#final-card');
+  const surprise = document.querySelector('#surprise');
+  const bigmsg = document.getElementById('bigmsg');
+
+  // Click toggles flipped. Also allow keyboard (Enter/Space) for accessibility.
+  cards.forEach(card => {
+    card.tabIndex = 0; // make focusable
+    card.addEventListener('click', () => {
+      card.classList.toggle('flipped');
+      onFlipChange(card);
+    });
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        card.classList.toggle('flipped');
+        onFlipChange(card);
+      }
+    });
+  });
+
+  // Called whenever a card is toggled
+  function onFlipChange(card){
+    // If the FINAL card got flipped to show back, reveal surprise area
+    if (card.dataset.page === 'final' && card.classList.contains('flipped')) {
+      revealSurprise();
+    } else if (card.dataset.page === 'final' && !card.classList.contains('flipped')) {
+      hideSurprise();
+    }
+  }
+
+  // Surprise message content (change this text to your exact apology)
+  const surpriseText = "I’m truly sorry. I messed up, and I want to make it right. You mean everything to me — please forgive me. 💕";
+
+  // Typewriter effect for the big message
+  function typeEffect(el, text, delay=30) {
+    el.innerHTML = '';
+    let i = 0;
+    const step = () => {
+      if (i <= text.length) {
+        // convert newlines to <br>
+        el.innerHTML = text.slice(0,i).replace(/\n/g,'<br>');
+        i++;
+        setTimeout(step, delay);
+      }
+    };
+    step();
+  }
+
+  function revealSurprise(){
+    surprise.classList.remove('hidden');
+    surprise.classList.add('visible');
+    // start typing
+    typeEffect(bigmsg, surpriseText, 35);
+    // focus for keyboard users
+    surprise.scrollIntoView({behavior:'smooth', block:'center'});
+  }
+
+  function hideSurprise(){
+    surprise.classList.remove('visible');
+    surprise.classList.add('hidden');
+    bigmsg.innerHTML = '';
+  }
+
+  // Bonus: allow double-tap protection on mobile (optional)
+  // Nothing else needed here; the code above is intentionally tiny and friendly.
+});
+</script>
+
+</body>
+</html>
